@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>M-Powered - Rajagiri x Vertical Eye</title>
+
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #10141a;
+      color: #e0e6ed;
+      position: relative;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: -1;
+      background: url('./images/yue-ma-Yc6Ik-48C18-unsplash.jpg') center center/cover no-repeat;
+      opacity: 0.2;
+      pointer-events: none;
+    }
+    header.hero {
+      background: #ffffff;
+      height: fit-content;
+      padding: 2%;
+    }
+    h1, h2 {
+      color: #ffffff;
+    }
+    h3 {
+      color: #000000;
+    }
+    a, .sidebar a {
+      color: #ffffff;
+    }
+    a:hover, .sidebar a:hover {
+      background: #00f6ff22;
+      color: #fff;
+    }
+    .menu-icon span {
+      background: #ffffff;
+    }
+    .sidebar {
+      background: #181c23;
+      color: #e0e6ed;
+    }
+    .sidebar a {
+      color: #ffffff;
+    }
+    .sidebar a:hover {
+      background: #00f6ff22;
+      color: #fff;
+    }
+    .trainer-card, .testimonial-cards .card {
+      background: #181c23;
+      color: #e0e6ed;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
+    .image-grid img {
+      box-shadow: 0 1px 8px rgba(0,246,255,0.12);
+    }
+    button, .btn, .play-video {
+      background: #ffffff;
+      color: #10141a;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 24px;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    button:hover, .btn:hover, .play-video:hover {
+      background: #ffffff;
+      color: #fff;
+    }
+
+    .logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .logos img {
+      height: 80px;
+    }
+
+    .hero h1 {
+    color: #000000;
+      font-size: 3rem;
+      animation: fadeInUp 1s ease-out forwards;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      opacity: 0;
+      animation: fadeInUp 1.2s ease-out forwards;
+      animation-delay: 0.3s;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    section {
+      padding: 50px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .trainer-card {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 20px;
+      align-items: center;
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .trainer-card:hover {
+      transform: scale(1.03);
+    }
+
+    .trainer-card img {
+      width: 200px;
+      max-width: 100%;
+      flex-shrink: 0;
+    }
+
+    .trainer-card > div {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .image-grid img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+      display: block;
+    }
+
+    .image-grid img:hover {
+      transform: scale(1.1) rotate(1deg);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .testimonial-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .testimonial-cards .card {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 300px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .testimonial-cards .card:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      background-color: #1e394e;
+      color: white;
+      padding: 20px;
+    }
+
+    @media (max-width: 700px) {
+      .trainer-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .image-grid img {
+        height: 180px;
+      }
+    }
+    @media (max-width: 600px) {
+      .image-grid img {
+        height: 120px;
+      }
+    }
+
+    /* Sidebar styles */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 250px;
+      height: 100%;
+      background: #fff;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      z-index: 1001;
+      padding-top: 60px;
+      transition: left 0.4s cubic-bezier(0.77,0,0.175,1);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .sidebar.open {
+      left: 0;
+    }
+    .sidebar a {
+      padding: 16px 32px;
+      text-decoration: none;
+      color: #222;
+      font-size: 1.1rem;
+      font-weight: 500;
+      transition: background 0.2s;
+      border-radius: 0 20px 20px 0;
+    }
+    .sidebar a:hover {
+      background: #f4b40022;
+      color: #1e394e;
+    }
+    .sidebar-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #1e394e;
+    }
+    /* Menu icon styles */
+    .menu-icon {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      z-index: 1100;
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .menu-icon:hover {
+      background: #f4b40022;
+    }
+    .menu-icon span {
+      display: block;
+      width: 24px;
+      height: 3px;
+      background: #1e394e;
+      margin: 4px 0;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.18);
+      z-index: 1000;
+      transition: opacity 0.3s;
+    }
+    .sidebar-backdrop.open {
+      display: block;
+      opacity: 1;
+    }
+    @media (max-width: 600px) {
+      .sidebar {
+        width: 80vw;
+        min-width: 180px;
+        max-width: 320px;
+      }
+    }
+
+    p {
+      /* color: #000 !important; */
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      margin: 40px auto;
+      padding: 0 0 40px 0;
+      max-width: 1200px;
+      border-left: none;
+      border-top: 3px solid #00f6ff;
+      position: relative;
+      gap: 32px;
+    }
+    .timeline-item {
+      position: relative;
+      flex: 1 1 0;
+      margin-bottom: 0;
+      padding-left: 0;
+      padding-top: 30px;
+      text-align: center;
+      min-width: 220px;
+      max-width: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .timeline-dot {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22px;
+      height: 22px;
+      background: #00f6ff;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 4px rgba(0,246,255,0.15);
+      z-index: 2;
+    }
+    .timeline-content {
+      background: #181c23;
+      color: #fff;
+      padding: 18px 24px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      margin-left: 0;
+      margin-top: 18px;
+      min-width: 220px;
+      max-width: 260px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.2s, border 0.2s, transform 0.2s;
+    }
+    .timeline-content:hover {
+      border: 2px solid #00f6ff;
+      box-shadow: 0 4px 20px rgba(0,246,255,0.18);
+      transform: scale(1.06);
+      z-index: 3;
+    }
+    .timeline-content h3 {
+      margin: 0 0 8px 0;
+      color: #00f6ff;
+    }
+    @media (max-width: 1200px) {
+      .timeline {
+        gap: 16px;
+        max-width: 98vw;
+      }
+      .timeline-item, .timeline-content {
+        min-width: 160px;
+        max-width: 200px;
+      }
+    }
+    @media (max-width: 900px) {
+      .timeline {
+        flex-direction: column;
+        border-top: none;
+        border-left: 3px solid #00f6ff;
+        padding-left: 30px;
+        padding-bottom: 0;
+        gap: 0;
+      }
+      .timeline-item {
+        text-align: left;
+        padding-top: 0;
+        padding-left: 30px;
+        min-width: 0;
+        max-width: 100%;
+        align-items: flex-start;
+      }
+      .timeline-dot {
+        left: -13px;
+        top: 0;
+        transform: none;
+      }
+      .timeline-content {
+        margin-left: 10px;
+        margin-top: 0;
+        display: block;
+        min-width: 0;
+        max-width: 100%;
+        width: auto;
+        align-items: flex-start;
+      }
+    }
+
+    .activities-grid img {
+      width: 100%;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+      display: block;
+    }
+    .slideshow-dots {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.slideshow-container {
+  position: relative;
+  max-width: 1000px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.slideshow-container img {
+  width: 100%;
+  height: 500px; /* You can adjust this to fit your design */
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+}
+
+/* Optional: Make arrows overlay on the image */
+.slide-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.slide-arrow.left {
+  left: 10px;
+}
+
+.slide-arrow.right {
+  right: 10px;
+}
+
+.slide-arrow:hover {
+  background: rgba(0,0,0,0.8);
+}
+
+  </style>
+</head>
+<body>
+  <!-- Menu Icon -->
+  <div class="menu-icon" id="menuIcon" title="Open menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <button class="sidebar-close" id="sidebarClose" title="Close menu">&times;</button>
+    <a href="#about">ABOUT</a>
+    <a href="#program-plan">PROGRAM PLAN</a>
+    <a href="#gallery">MEDIA GALLERY</a>
+    <a href="#management-activity">MANAGEMENT ACTIVITY</a>
+    <a href="#testimonials">STUDENT REVIEWS</a>
+  </div>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <header class="hero" data-aos="fade-down">
+    <div class="logos">
+      <h1>M-Powered</h1>
+    </div>
+    <p class="subtitle">Transforming Young Minds into Professionals</p>
+  </header>
+
+  <section class="about" data-aos="fade-up">
+    <h2>About the Program</h2>
+    <p style="color: #ffffff">
+      M-Powered is a four-day corporate training initiative by <strong>Rajagiri College of Social Sciences</strong> in association with <strong>Vertical Eye</strong>. The program is designed to shape postgraduates into confident and corporate-ready individuals through interactive workshops, personal transformation sessions, and practical exposure.
+    </p>
+    <div class="logos" style="justify-content: center; gap: 40px; margin-top: 20px;">
+      <img src="./images/rajagiri.png" alt="Rajagiri Logo" style="height: 60px; background: #fff; border-radius: 8px; padding: 4px;" />
+      <img src="./images/verticaleye.png" alt="Vertical Eye Logo" style="height: 60px; background: #fff; border-radius: 8px; padding: 4px;" />
+    </div>
+  </section>
+
+  <section class="trainer">
+    <h2 data-aos="zoom-in">Meet the Trainers</h2>
+    <div class="trainer-card" data-aos="fade-left">
+      <img src="./images/krishnakumar.jpg" alt="Mr. Krishnakumar" />
+      <div>
+        <h3>Krish Sir and Mridula Mam</h3>
+        <p style="color: #000000;">
+          Krish Sir and Mridula Mam are award-winning corporate trainers and internationally certified life skills coaches. With extensive experience as motivational speakers, psychologists, entrepreneurs, and authors, they have inspired and trained over 60,000 participants worldwide. Their mission is to empower individuals and positively transform lives through impactful coaching and training.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="program-plan" class="program-plan" data-aos="fade-up" style="margin-top: 60px;">
+    <h2 style="text-align:center;">Program Timeline</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>Day 1</h3>
+          <p>Ice-breaking and introspection</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>Day 2</h3>
+          <p>Communication & presentation skills</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>Day 3</h3>
+          <p>Leadership & workplace behavior</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>Day 4</h3>
+          <p>Valedictory & awards</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery" data-aos="fade-up">
+  <h2>Memories Gallery</h2>
+  <div class="slideshow-container" id="gallery-slideshow">
+    <button class="slide-arrow left" id="prevSlide">&#10094;</button>
+    <img id="slideshow-image" src="" alt="Memory" />
+    <button class="slide-arrow right" id="nextSlide">&#10095;</button>
+  </div>
+  <div class="slideshow-dots" id="slideshow-dots"></div>
+</section>
+
+  <section id="activities" class="activities" data-aos="fade-up">
+    <h2>Management Activities</h2>
+    <div class="image-grid activities-grid">
+      <img src="./images/memories/management/20250702_110513.jpg" alt="Activity 1" />
+      <img src="./images/memories/management/20250702_100434.jpg" alt="Activity 2" />
+      <img src="./images/memories/management/20250702_150307.jpg" alt="Activity 3" />
+      <img src="./images/memories/management/20250702_112106.jpg" alt="Activity 4" />
+      <img src="./images/memories/management/20250702_151045.jpg" alt="Activity 5" />
+      <img src="./images/memories/management/20250702_161058(0)(1).jpg" alt="Activity 6" />
+      <img src="./images/memories/management/20250702_111823.jpg" alt="Activity 7" />
+      <img src="./images/memories/management/20250702_151127.jpg" alt="Activity 8" />
+      <img src="./images/memories/management/20250702_111041.jpg" alt="Activity 9" />
+      <img src="./images/memories/management/20250702_160427(1).jpg" alt="Activity 10" />
+      <img src="./images/memories/management/20250702_110909.jpg" alt="Activity 11" />
+      <img src="./images/memories/management/20250701_103028.jpg" alt="Activity 12" />
+      <img src="./images/memories/management/20250701_095929.jpg" alt="Activity 13" />
+      <img src="./images/memories/management/20250701_103538.jpg" alt="Activity 14" />
+      <img src="./images/memories/management/20250701_103254.jpg" alt="Activity 15" />
+      <img src="./images/memories/management/20250701_103432.jpg" alt="Activity 16" />
+      <img src="./images/memories/management/20250701_103528.jpg" alt="Activity 17" />
+      <img src="./images/memories/management/20250701_135443.jpg" alt="Activity 18" />
+      <img src="./images/memories/management/20250701_103129.jpg" alt="Activity 19" />
+      <img src="./images/memories/management/20250701_095615.jpg" alt="Activity 20" />
+      <img src="./images/memories/management/20250701_103338.jpg" alt="Activity 21" />
+      <img src="./images/memories/management/20250701_102957.jpg" alt="Activity 22" />
+      <img src="./images/memories/management/20250701_112035.jpg" alt="Activity 23" />
+      <img src="./images/memories/management/20250701_094851.jpg" alt="Activity 24" />
+      <img src="./images/memories/management/20250701_094658.jpg" alt="Activity 25" />
+      <img src="./images/memories/management/20250701_095054.jpg" alt="Activity 26" />
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <h2 data-aos="flip-up">Student Testimonials</h2>
+    <div class="testimonial-cards">
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <p style="color: #000000;">"This program gave me the confidence I never knew I had. A transformational experience!"</p>
+        <span style="color: #000000; font-weight: bold;">– Sreeraj Sreekumar</span>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="200">
+        <p style="color: #000000;">"Krishnakumar sir's sessions were life-changing. I feel truly M-Powered!"</p>
+        <span style="color: #000000; font-weight: bold;">– Rena Elza Viju</span>
+      </div>
+    </div>
+  </section>
+
+  <footer data-aos="fade-in">
+    <p>&copy; 2025 Rajagiri College & Vertical Eye | M-Powered</p>
+  </footer>
+
+  <script>
+  AOS.init({ duration: 1200, once: true });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const imageList = [
+      "20250701_101151.jpg",
+      "20250701_135443.jpg",
+      "20250701_094310.jpg",
+      "20250701_115500.jpg",
+      "20250701_094255.jpg",
+      "20250701_122945.jpg",
+      "20250701_123200.jpg",
+      "20250701_123043.jpg"
+    ];
+
+    let currentSlide = 0;
+    let autoSlideInterval;
+
+    const slideshowImage = document.getElementById("slideshow-image");
+    const dotsContainer = document.getElementById("slideshow-dots");
+    const prevBtn = document.getElementById("prevSlide");
+    const nextBtn = document.getElementById("nextSlide");
+
+    function showSlide(index) {
+      if (index < 0) index = imageList.length - 1;
+      if (index >= imageList.length) index = 0;
+      currentSlide = index;
+      slideshowImage.src = `./images/memories/${imageList[currentSlide]}`;
+      updateDots();
+    }
+
+    function updateDots() {
+      dotsContainer.innerHTML = "";
+      imageList.forEach((_, i) => {
+        const dot = document.createElement("span");
+        dot.classList.add("dot");
+        if (i === currentSlide) dot.classList.add("active");
+        dot.addEventListener("click", () => {
+          showSlide(i);
+          restartAutoSlide();
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(() => {
+        showSlide(currentSlide + 1);
+      }, 5000);
+    }
+
+    function stopAutoSlide() {
+      clearInterval(autoSlideInterval);
+    }
+
+    function restartAutoSlide() {
+      stopAutoSlide();
+      startAutoSlide();
+    }
+
+    prevBtn.addEventListener("click", () => {
+      showSlide(currentSlide - 1);
+      restartAutoSlide();
+    });
+
+    nextBtn.addEventListener("click", () => {
+      showSlide(currentSlide + 1);
+      restartAutoSlide();
+    });
+
+    showSlide(0);
+    startAutoSlide();
+  });
+
+  // Sidebar toggle logic
+  const menuIcon = document.getElementById('menuIcon');
+  const sidebar = document.getElementById('sidebar');
+  const sidebarClose = document.getElementById('sidebarClose');
+  const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    sidebarBackdrop.classList.add('open');
+    menuIcon.style.display = 'none';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    sidebarBackdrop.classList.remove('open');
+    menuIcon.style.display = '';
+    document.body.style.overflow = '';
+  }
+
+  menuIcon.addEventListener('click', openSidebar);
+  sidebarClose.addEventListener('click', closeSidebar);
+  sidebarBackdrop.addEventListener('click', closeSidebar);
+</script>
+
+</body>
+</html>
